@@ -154,31 +154,28 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      debugger;
-      var rows = this.rows();
+      var colIndex = majorDiagonalColumnIndexAtFirstRow;
+      var matrix = this.rows();
       var columnCnt = this.rows()[0].length;
       var counter = 0;
-      
-      for (var i = majorDiagonalColumnIndexAtFirstRow; i < columnCnt; i++) {
-          if (this.rows()[majorDiagonalColumnIndexAtFirstRow][j] === 1) {
+      //debugger;
+      for (var i = majorDiagonalColumnIndexAtFirstRow, j = 0; i < columnCnt - colIndex, j < columnCnt - Math.abs(colIndex); i++, j++) {
+        if (i >= 0) {
+          if (matrix[i][j] === 1) {
             counter++;
-        }        
+          }    
+        }
       }
-      return counter >=2; // fixme
-      
-      
+      return counter >= 2; // fixme
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      debugger;
+      //debugger;
       var rows = this.rows();
-      var cnt = this.rows().length;
-      // Traverse the array from bottom left to top right
-      // Assign majorDiagonalColumnIndexAtFirstRow to bottom left corner
-      // stopping condition is when column index === rows.length - 1
-      for (var i = cnt - 1; i > 0; i--) {
-        if (this._getFirstRowColumnIndexForMajorDiagonalOn(i, 0)) {
+      var cnt = this.rows().length - 1;
+      for (var i = cnt; i > 0; i--) {
+        if (this.hasMajorDiagonalConflictAt(this._getFirstRowColumnIndexForMajorDiagonalOn(i, 0))) {
           return true;
         }
       }
