@@ -159,8 +159,8 @@
       var columnCnt = this.rows()[0].length;
       var counter = 0;
       //debugger;
-      for (var i = majorDiagonalColumnIndexAtFirstRow, j = 0; i < columnCnt - colIndex, j < columnCnt - Math.abs(colIndex); i++, j++) {
-        if (i >= 0) {
+      for (var i = colIndex, j = 0; j < columnCnt; i++, j++) {
+        if (i >= 0 && i < columnCnt) {
           if (matrix[i][j] === 1) {
             counter++;
           }    
@@ -171,16 +171,24 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      //debugger;
+      var result = false;
       var rows = this.rows();
       var cnt = this.rows().length - 1;
+      //debugger;
       for (var i = cnt; i > 0; i--) {
-        if (this.hasMajorDiagonalConflictAt(this._getFirstRowColumnIndexForMajorDiagonalOn(i, 0))) {
-          return true;
+        
+        if (this.hasMajorDiagonalConflictAt(0 - i)) {
+          result = true;
         }
       }
-      return false;
+      //debugger;
+      for (var i = 0; i < cnt; i++) {
+        if (this.hasMajorDiagonalConflictAt(i)) {
+          result = true;
+        }
+      }
       
+      return result;      
     },
 
 
