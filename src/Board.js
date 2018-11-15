@@ -129,7 +129,7 @@
         }
         // Check the value at colIndex
       }
-      return (counter >= 2); // fixme
+      return (counter >= 2);
     },
 
     // test if any columns on this board contain conflicts
@@ -144,7 +144,7 @@
         }
       }
       
-      return colConflict; // fixme
+      return colConflict;
     },
 
 
@@ -154,12 +154,21 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      debugger;
+      var rows = this.rows();
+      var columnCnt = this.rows()[0].length;
+      var counter = 0;
       return false; // fixme
+      
+      
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      // Traverse the array from bottom left to top right
+      // Assign majorDiagonalColumnIndexAtFirstRow to bottom left corner
+      // stopping condition is 
+      
     },
 
 
