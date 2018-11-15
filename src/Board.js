@@ -79,12 +79,36 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      // Take in a row index from the board which should be an array
+      // Create a counter to check for number of 1's in row
+      
+      var counter = 0;
+      // Iterate through this array at rowIndex
+      for (var i = 0; i < rowIndex.length; i++) {
+        // Check to see if value at index === 1
+        if (rowIndex[i] === 1) {
+          // If value is equal to 1 counter ++
+          counter++;
+        }
+      }
+      // Return the boolean value of counter === 2      
+      return (counter >= 2);     
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      // Take in an n x n matrix
+      var currRows = this.rows();
+      var rowConflict = false;
+      // iterate through the matrix rows
+      for (var i = 0; i < currRows.length; i++) {
+        // For each row, determine whether that row has a conflict
+        if (this.hasRowConflictAt(currRows[i])) {
+          // Return the result
+          return true;
+        }      
+      }
+      return rowConflict;
     },
 
 
@@ -94,12 +118,33 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      //debugger;
+      var columnCnt = this.rows()[0].length;
+      var rowCnt = columnCnt;
+      var counter = 0;
+      // Iterate over all of the rows
+      for (var i = 0; i < rowCnt; i++) {
+        if (this.rows()[i][colIndex] === 1) {
+          counter++;
+        }
+        // Check the value at colIndex
+      }
+      return (counter >= 2); // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      
+      var columns = this.rows()[0].length;
+      var colConflict = false;
+      
+      for (var i = 0; i < columns; i++) {
+        if (this.hasColConflictAt(i)) {
+          return true;
+        }
+      }
+      
+      return colConflict; // fixme
     },
 
 
