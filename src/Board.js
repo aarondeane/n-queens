@@ -158,16 +158,31 @@
       var rows = this.rows();
       var columnCnt = this.rows()[0].length;
       var counter = 0;
-      return false; // fixme
+      
+      for (var i = majorDiagonalColumnIndexAtFirstRow; i < columnCnt; i++) {
+          if (this.rows()[majorDiagonalColumnIndexAtFirstRow][j] === 1) {
+            counter++;
+        }        
+      }
+      return counter >=2; // fixme
       
       
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+      debugger;
+      var rows = this.rows();
+      var cnt = this.rows().length;
       // Traverse the array from bottom left to top right
       // Assign majorDiagonalColumnIndexAtFirstRow to bottom left corner
-      // stopping condition is 
+      // stopping condition is when column index === rows.length - 1
+      for (var i = cnt - 1; i > 0; i--) {
+        if (this._getFirstRowColumnIndexForMajorDiagonalOn(i, 0)) {
+          return true;
+        }
+      }
+      return false;
       
     },
 
