@@ -78,10 +78,10 @@
     // --------------------------------------------------------------
     //
     // test if a specific row on this board contains a conflict
+    
     hasRowConflictAt: function(rowIndex) {
       // Take in a row index from the board which should be an array
       // Create a counter to check for number of 1's in row
-      
       var counter = 0;
       // Iterate through this array at rowIndex
       for (var i = 0; i < rowIndex.length; i++) {
@@ -118,7 +118,6 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      //debugger;
       var columnCnt = this.rows()[0].length;
       var rowCnt = columnCnt;
       var counter = 0;
