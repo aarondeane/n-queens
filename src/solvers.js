@@ -17,30 +17,30 @@ window.findNRooksSolution = function(n) {
   
   var solution = [];
     
-    var board = new Board({n: n});
+  var board = new Board({n: n});
     
-    var findSolution = function(currBoard, piecesToggled, row) {
-      // Base case
-        if (piecesToggled === n) {
-          // return array solution (the first one you find)
-          solution = currBoard.rows();
-          return;
-        }
-        // Iterate through board starting at [0,0]
-        // for (var i = 0; i < n; i++) {
-          for (var j = 0; j < n; j++) {
-            // Toggle piece at first location
-            currBoard.togglePiece(row, j);
-            piecesToggled++
-            if(currBoard.hasAnyRooksConflicts()) {
-              currBoard.togglePiece(row, j);
-              piecesToggled--;
-            }
-          }
-          findSolution(currBoard, piecesToggled, row + 1);        
-        }
+  var findSolution = function(currBoard, piecesToggled, row) {
+    // Base case
+    if (piecesToggled === n) {
+      // return array solution (the first one you find)
+      solution = currBoard.rows();
+      return;
+    }
+    // Iterate through board starting at [0,0]
+    // for (var i = 0; i < n; i++) {
+    for (var j = 0; j < n; j++) {
+      // Toggle piece at first location
+      currBoard.togglePiece(row, j);
+      piecesToggled++;
+      if (currBoard.hasAnyRooksConflicts()) {
+        currBoard.togglePiece(row, j);
+        piecesToggled--;
+      }
+    }
+    findSolution(currBoard, piecesToggled, row + 1);        
+  }
 
-    findSolution(board, 0, 0); 
+  findSolution(board, 0, 0); 
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
@@ -62,8 +62,8 @@ window.countNRooksSolutions = function(n) {
     }
     
     for (var i = 0, j = colIndex; i < n; i++, j++) {
-        currBoard.togglePiece(j, i);
-        piecesToggled++;
+      currBoard.togglePiece(j, i);
+      piecesToggled++;
     }
     // Place a rook at [colIndex,rowIndex]
     // skip down one index and increment one index
