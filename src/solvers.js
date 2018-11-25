@@ -53,33 +53,25 @@ window.countNRooksSolutions = function(n) {
   var board = new Board({n: n});
   
   
-  var findSolutions = function(currBoard, piecesToggled, colIndex) {
-    // base case again is number of pieces placed = n
-    // Increment solutions counter
-    if (piecesToggled === n) {
+  var findSolutions = function(row) {
+    // base case again is number of rows  = n
+    if (row === n) {
+      // Increment solutions counter
       solutionCount++;
       return;
     }
     
-    for (var i = 0, j = colIndex; i < n; i++, j++) {
-      currBoard.togglePiece(j, i);
-      piecesToggled++;
+    for (var i = 0; i < n; i++) {
+      board.togglePiece(row, i);
+      if (!board.hasAnyRooksConflicts()) {
+        findSolutions(row + 1);
+      }
+      board.togglePiece(row, i);
     }
-    // Place a rook at [colIndex,rowIndex]
-    // skip down one index and increment one index
-    //check if rowIndex = last index placed
-    // place another rook 
-    // increment pieces toggled
-    
-  //recurse
-    findSolutions(currBoard, piecesToggled, colIndex + 1);
-  }
+  };
 
+  findSolutions(0);
 
-  
-  findSolutions(board, 0, 0, 0)
-  
-  // call initial round of recursive function with board, 0, 0
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
 };
